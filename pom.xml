@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>rahulshettyacademy</groupId>
+    <artifactId>SeleniumFramworkDesign</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+
+<!-- Selenium -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.46.0</version>
+        </dependency>
+        
+<!-- Cucumber Java --> 
+<dependency> 
+	<groupId>io.cucumber</groupId> 
+	<artifactId>cucumber-java</artifactId> 
+	<version>7.34.4</version> 
+</dependency>
+
+<!-- Cucumber TestNG --> 
+<dependency> 
+	<groupId>io.cucumber</groupId> 
+	<artifactId>cucumber-testng</artifactId> 
+	<version>7.34.4</version> 
+</dependency>
+
+<!-- Webdriver Manager -->
+<dependency>
+    <groupId>io.github.bonigarcia</groupId>
+    <artifactId>webdrivermanager</artifactId>
+    <version>6.3.4</version>
+    <scope>compile</scope>
+</dependency>
+
+<!-- TestNG-->
+<dependency>
+    <groupId>org.testng</groupId>
+    <artifactId>testng</artifactId>
+    <version>7.12.0</version>
+    <scope>test</scope>
+</dependency>
+
+		<!-- jackson-databind -->
+<dependency>
+    <groupId>tools.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>3.2.1</version>
+    <scope>compile</scope>
+</dependency>
+
+		<!-- JUnit 5 
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>5.13.4</version>
+			<scope>test</scope>
+		</dependency>
+-->
+
+		<!-- Per evitare che apaia nella console il Warning rispetto a slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>2.0.17</version>
+		</dependency>
+
+<!-- Extent Reports -->
+<dependency>
+    <groupId>com.aventstack</groupId>
+    <artifactId>extentreports</artifactId>
+    <version>5.1.2</version>
+    <scope>compile</scope>
+</dependency>
+		
+
+    </dependencies>
+    <profiles>
+    
+  <!--Regression --> 
+    	<profile>
+    		<id>Regression</id>
+    	<build>
+    	
+        <plugins>
+         
+        <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<version>3.5.4</version>
+			<configuration>
+				<suiteXmlFiles>
+					<suiteXmlFile>testSuites/testng.xml</suiteXmlFile>
+				</suiteXmlFiles>
+			</configuration>
+		</plugin>
+		</plugins>
+		
+		</build>
+    		
+    	</profile>
+    	
+<!--Purchase -->  	
+    	<profile>
+    		<id>Purchase</id>
+    	<build>
+    
+        <plugins>
+         
+        <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<version>3.5.4</version>
+			<configuration>
+				<suiteXmlFiles>
+					<suiteXmlFile>testSuites/Purchase.xml</suiteXmlFile>
+				</suiteXmlFiles>
+			</configuration>
+		</plugin>
+		</plugins>
+		
+		</build>
+    		 
+    	</profile>
+    	
+<!--Cucumber -->  	
+    	<profile>
+    		<id>CucumberTests</id>
+    	<build>
+    
+        <plugins>
+         
+        <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<version>3.5.4</version>
+			<configuration>
+				<includes>
+					<include>**/TestNGTestRunner.java</include>
+				</includes>
+			</configuration>
+		</plugin>
+		</plugins>
+		
+		</build>
+    		
+    	</profile>
+    	
+<!--ErrorValidations -->  
+    	<profile>
+    		<id>ErrorValidation</id>
+    		
+    	<build>
+    	
+        <plugins>
+         
+        <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<version>3.5.4</version>
+			<configuration>
+				<suiteXmlFiles>
+					<suiteXmlFile>testSuites/Purchase.xml</suiteXmlFile>
+				</suiteXmlFiles>
+			</configuration>
+		</plugin>
+		</plugins>
+		
+		</build>
+		
+    	</profile>
+    	
+    </profiles>
+    
+
+    <build>
+    
+        <plugins>
+         
+        <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<version>3.5.4</version>
+			<configuration>
+				<suiteXmlFiles>
+					<suiteXmlFile>testSuites/ErrorValidationsTests.xml</suiteXmlFile>
+				</suiteXmlFiles>
+			</configuration>
+		</plugin>
+        
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.14.1</version>
+            </plugin>
+
+        </plugins>
+       
+    </build>
+
+</project>
